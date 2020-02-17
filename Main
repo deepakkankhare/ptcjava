@@ -1,0 +1,28 @@
+public class SouceIntegrity {
+
+	public static void main(String[] args) {
+		Operations myoperations = new Operations();
+
+		try {
+		//	System.out.println("*******Crate SandBox*****");
+		//	String projectname = myoperations.createproject();
+		//	System.out.println(projectname);
+			//myoperations.createSandBox();
+			myoperations.viewSandBoxes();
+			String cwd = "C:/Users/deepak.kankhare/Documents/SandBox/java2";
+			myoperations.exportSandbox(cwd);
+		//	myoperations.importSandBox();
+			
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		} finally {
+			myoperations.releaseSession();
+		}
+
+	}
+}
