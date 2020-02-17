@@ -1,0 +1,46 @@
+
+
+import java.io.IOException;
+
+import com.mks.api.IntegrationPoint;
+import com.mks.api.IntegrationPointFactory;
+import com.mks.api.Session;
+import com.mks.api.response.APIException;
+
+public class SessionManager {
+
+	public static Session mysession = null;
+
+	public Session Connect() throws IOException, APIException {
+		boolean connectStatus = false;
+		ConnectionInformation connectionInfo = new ConnectionInformation();
+
+		connectionInfo.setHost("hclt-pc4391-1");
+		connectionInfo.setPassword("111@mypc");
+		connectionInfo.setPort(7001);
+		connectionInfo.setUser("deepakk");
+
+		IntegrationPointFactory myipf = IntegrationPointFactory.getInstance();
+		IntegrationPoint myip = myipf.createIntegrationPoint(connectionInfo.getHost(), connectionInfo.getPort(), 4, 16);
+		mysession = myip.createSession(connectionInfo.getUser(), connectionInfo.getPassword());
+		if (mysession != null) {
+			connectStatus = true;
+			System.out.println("Connected to Server !");
+		}
+
+		return mysession;
+	}
+
+	public void releaseSession() {
+		try {
+			mysession.release();
+			System.out.println("Session closed !");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (APIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
